@@ -23,7 +23,7 @@ jobs:
       - name: Send POST request, Extract, and Close
         id: send-request-extract-and-close
         run: |
-          response=$(curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" https://gpt4free.awdev.repl.co/quick)
+          response=$(curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" "${{ secrets.HOST }}")
           echo "$response" >> result.json
           result=$(jq '.response' 'result.json')
           echo "result is $result"
