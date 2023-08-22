@@ -35,4 +35,4 @@ jobs:
       - name: Close & Reply Issue
         id: close-and-reply
         run: |
-          gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment "${{ steps.extract-response.outputs.result }}"
+          gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment ${{ steps.extract-response.outputs.result }}
