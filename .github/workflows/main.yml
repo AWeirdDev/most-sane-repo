@@ -25,8 +25,8 @@ jobs:
       - name: Extract server response
         id: extract-response
         run: |
-          echo ${{ steps.send-request.outputs.response }} > result.json
-          result=$(jq '.response' result.json)
+          echo '${{ steps.send-request.outputs.response }}' > result.json
+          result=$(jq '.response' 'result.json')
           echo "result is $result"
           echo "result=$result" >> $GITHUB_OUTPUT
 
