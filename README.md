@@ -1,0 +1,13 @@
+# most-sane-repo
+
+The most sane ChatGPT ever created. Maybe.
+
+Create a new issue and chat with the GPT.
+
+## [✨ Ask a question](https://github.com/AWeirdScratcher/most-sane-repo/issues/new)
+
+## How Does It Work?
+
+1. Backend
+2. GitHub Actions
+3. Issues but I don't like issues
