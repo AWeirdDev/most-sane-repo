@@ -23,7 +23,7 @@ jobs:
       - name: Send POST request, Extract, and Close
         id: send-request-extract-and-close
         run: |
-          response=$(curl -X POST -H "API-KEY: $${{ secrets.GPT_TOKEN }}" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" "${{ secrets.HOST }}")
+          response=$(curl -X POST -H "API-KEY: ${{ secrets.GPT_TOKEN }}" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" "${{ secrets.HOST }}")
           echo "$response" >> result.json
           result=$(jq '.response' 'result.json')
           echo "result is $result"
