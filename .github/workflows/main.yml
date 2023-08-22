@@ -27,5 +27,5 @@ jobs:
           echo "$response" >> result.json
           result=$(jq '.response' 'result.json')
           echo "result is $result"
-          gh issue edit https://github.com/is-probably-gay/is-probably-gay/issues/${{ github.event.issue.number }} --add-label "replied"
+          gh issue edit https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --add-label "replied"
           gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment "$result"
