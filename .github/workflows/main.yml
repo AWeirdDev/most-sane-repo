@@ -20,21 +20,11 @@ jobs:
         id: read-issue
         run: echo "content=${{ github.event.issue.body }}" >> $GITHUB_OUTPUT
 
-      - name: Send POST request
-        id: send-request
+      - name: Send POST request, Extract, and Close
+        id: send-request-extract-and-close
         run: |
           response=$(curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" https://gpt4free.awdev.repl.co/quick)
-          echo "response=$response" >> $GITHUB_OUTPUT
-
-      - name: Extract server response
-        id: extract-response
-        run: |
-          echo '${{ steps.send-request.outputs.response }}' > result.json
+          echo "$response" >> result.json
           result=$(jq '.response' 'result.json')
           echo "result is $result"
-          echo "result=$result" >> $GITHUB_OUTPUT
-
-      - name: Close & Reply Issue
-        id: close-and-reply
-        run: |
-          gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment ${{ steps.extract-response.outputs.result }}
+          gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment "$result"
