@@ -14,21 +14,21 @@ jobs:
 
       - name: Read issue content
         id: read-issue
-        run: echo "::set-output name=content::${{ github.event.issue.body }}"
+        run: echo "content=${{ github.event.issue.body }}" >> $GITHUB_OUTPUT
 
       - name: Send POST request
         id: send-request
         run: |
           response=$(curl -X POST -H "Content-Type: application/json" -d "{\"content\": \"$${{ steps.read-issue.outputs.content }}\"}" https://gpt4free.awdev.repl.co/quick)
-          echo "::set-output name=response::$response"
+          echo "response=$response" >> $GITHUB_OUTPUT
 
       - name: Extract server response
         id: extract-response
         run: |
-          echo "::set-output name=result::$(echo ${{ steps.send-request.outputs.response }} | jq -r '.response')"
+          echo "result=$(echo ${{ steps.send-request.outputs.response }} | jq -r '.response')" >> $GITHUB_OUTPUT
 
       - name: Reply to issue
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.issue.number }}
-          body: ${{ steps.extract-response.outputs.response }}
+          body: ${{ steps.extract-response.outputs.result }}
