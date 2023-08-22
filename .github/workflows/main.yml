@@ -25,7 +25,9 @@ jobs:
       - name: Extract server response
         id: extract-response
         run: |
-          echo "result=$(echo ${{ steps.send-request.outputs.response }} | jq -r '.response')" >> $GITHUB_OUTPUT
+          result=$(echo ${{ steps.send-request.outputs.response }} | jq -r '.response')
+          echo "result is $result"
+          echo "result=$result" >> $GITHUB_OUTPUT
 
       - name: Reply to issue
         uses: peter-evans/create-or-update-comment@v1
