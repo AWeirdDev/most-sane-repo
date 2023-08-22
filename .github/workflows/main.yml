@@ -32,8 +32,7 @@ jobs:
           echo "result is $result"
           echo "result=$result" >> $GITHUB_OUTPUT
 
-      - name: Reply to issue
-        uses: peter-evans/create-or-update-comment@5f728c3dae25f329afbe34ee4d08eef25569d79f
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: ${{ steps.extract-response.outputs.result }}
+      - name: Close & Reply Issue
+        id: close-and-reply
+        run: |
+          gh issue close https://github.com/AWeirdScratcher/most-sane-repo/issues/${{ github.event.issue.number }} --comment "${{ steps.extract-response.outputs.result }}" --reason "cheese"
